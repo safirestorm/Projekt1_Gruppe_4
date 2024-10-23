@@ -7,15 +7,14 @@ import java.time.LocalDate;
 public class Aftaler {
     String navn;
     LocalDate dato;
-    int bookingtid;
+    int bookingtid=0;
     double beløb;
 
     Aftaler(String navn, LocalDate dato, int bookingtid){
         this.navn = navn;
-       this.dato = dato;
+        this.dato = dato;
         this.bookingtid = bookingtid;
         beløb = 250;
-
     }
 
 
