@@ -13,14 +13,15 @@ public class Kalender {
         bookinger.add(new Aftaler("Bob",LocalDate.of(2024,03,22), 13));
 
 
+        for(int a=10; a<18; a++) {
+            System.out.println("Klokken: "+a+":00");
 
         for(Aftaler b:bookinger){
-            for(int a=10; a<18; a++) {
                 if (b.dato.isEqual(LocalDate.of(2024, 03, 22)) && b.bookingtid == a) {
-                    System.out.println("Klokken: "+a+":00");
                     System.out.println(b);
                 }
             }
         }
+
     }
 }
