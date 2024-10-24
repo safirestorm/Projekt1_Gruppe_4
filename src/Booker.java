@@ -11,8 +11,13 @@ public class Booker {
     static Scanner tastatur = new Scanner(System.in);
 
     public static void main(String[] args) {
+        /*
         Booker b1=new Booker();
         b1.opretAftaler();
+        */
+
+        Kalender b2 =new Kalender();
+        b2.seLedigeTider();
 
     }
 
@@ -45,18 +50,16 @@ public class Booker {
              bookingtid = tastatur.nextInt();
         }
 
-
-
-       
-
       bookinger.add(new Aftaler(navn,dato, bookingtid));
         System.out.println(bookinger);
 
 
     }
+    void seAftaler(){
 
 
 
+    }
 
 }
 
