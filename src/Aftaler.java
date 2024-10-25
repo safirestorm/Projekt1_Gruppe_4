@@ -5,12 +5,16 @@ import java.time.LocalDate;
 
 
 public class Aftaler {
+    int id;
+    static int nrAftaler=0;
     String navn;
     LocalDate dato;
     int bookingtid=0;
     double beløb;
 
     Aftaler(String navn, LocalDate dato, int bookingtid){
+        nrAftaler++;
+        id=nrAftaler;
         this.navn = navn;
         this.dato = dato;
         this.bookingtid = bookingtid;
@@ -19,7 +23,7 @@ public class Aftaler {
 
 
     public String toString() {
-        return navn + " "  + dato + " " +"klokken "+ bookingtid + ":00 " + beløb +" kroner";
+        return id+ " " + navn + " "  + dato + " " +"klokken "+ bookingtid + ":00 " + beløb +" kroner";
     }
     public static void main(String[] args) {
         Aftaler a1 = new Aftaler("Bob",LocalDate.of(2024,10,23), 13);
