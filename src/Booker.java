@@ -45,6 +45,7 @@ public class Booker {
 
         System.out.println("Hvilken tid?");
         int bookingtid = tastatur.nextInt();
+        tastatur.nextLine();
         while (bookingtid < 10 || bookingtid > 17){
              System.out.println("Det er udenfor vores åbningstid, prøv igen.");
              bookingtid = tastatur.nextInt();

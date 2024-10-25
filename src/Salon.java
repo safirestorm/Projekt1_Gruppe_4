@@ -6,6 +6,8 @@ public class Salon {
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         int valg;
+        Kalender ledigeTider = new Kalender();
+        Booker bookAnsvarlig = new Booker();
 
         while (true) {
             System.out.println("Velkommen til Harry's Salon");
@@ -19,6 +21,10 @@ public class Salon {
             if (valg ==0) {
                 System.out.println("Tak for idag.");
                 break;
+            }
+            while (valg != 0 && valg != 1 && valg != 2){
+                System.out.println("Ugyldigt valg, prøv igen.");
+                valg=keyboard.nextInt();
             }
 
 
@@ -34,6 +40,27 @@ public class Salon {
                     bookerValg = keyboard.nextInt();
                     keyboard.nextLine();
                     if (bookerValg == 4) break;
+
+                    switch (bookerValg) {
+                        case 1:
+                            ledigeTider.seLedigeTider();
+                            System.out.println();
+                            break;
+                        case 2:
+                            bookAnsvarlig.opretAftaler();
+                            System.out.println();
+                            while (true){
+                                String svar;
+                                System.out.println("Vil du oprette flere aftaler?");
+                                svar = keyboard.nextLine();
+                                if (svar.equals("Ja")){
+                                    bookAnsvarlig.opretAftaler();
+                                } else break;       // Skal laves en catch, hvis de svarer andet end ja/nej
+                            }
+
+                            break;
+                        case 3:
+                    }
                 }
             }
             else {
@@ -46,6 +73,10 @@ public class Salon {
                     revisorValg = keyboard.nextInt();
                     keyboard.nextLine();
                     if (revisorValg == 2) break;
+
+                    if (revisorValg == 1){
+
+                    }
                 }
             }
         }
