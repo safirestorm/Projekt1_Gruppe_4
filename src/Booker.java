@@ -11,21 +11,27 @@ public class Booker {
     static Scanner tastatur = new Scanner(System.in);
 
     public static void main(String[] args) {
-        /*
+
         Booker b1=new Booker();
         b1.opretAftaler();
-        */
 
+
+        /*
         Kalender b2 =new Kalender();
         b2.seLedigeTider();
+        */
+
 
     }
 
     void opretAftaler (){
+
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
 
+        LocalDate dato=seAftaler();
 
+        /*
         LocalDate dato = null;
         boolean korrektdato = false;
 
@@ -50,17 +56,43 @@ public class Booker {
              System.out.println("Det er udenfor vores åbningstid, prøv igen.");
              bookingtid = tastatur.nextInt();
         }
-
+    */
+        int bookingtid= seTid();
       bookinger.add(new Aftaler(navn,dato, bookingtid));
         System.out.println(bookinger);
 
 
     }
-    void seAftaler(){
+    LocalDate seAftaler() {
+        LocalDate dato = null;
+        boolean korrektdato = false;
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        while (!korrektdato) {
+            System.out.println("Skriv dato (yyyy-mm-dd):");
+            String intastetDato = tastatur.nextLine();
+
+            try {
+                dato = LocalDate.parse(intastetDato, formatter);
+                korrektdato = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Ugyldig dato, skriv dato (yyyy-mm-dd)");
+            }
+        }
+        return dato;
+    }
+        int seTid() {
+            System.out.println("Hvilken tid?");
+            int bookingtid = tastatur.nextInt();
+            tastatur.nextLine();
+            while (bookingtid < 10 || bookingtid > 17) {
+                System.out.println("Det er udenfor vores åbningstid, prøv igen.");
+                bookingtid = tastatur.nextInt();
+            }
+            return bookingtid;
+        }
 
 
     }
-
-}
 
