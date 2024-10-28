@@ -46,15 +46,15 @@ public class Aftaler {
     }
 
     public static void fjerAftaler(){
-        seLedigeTider();
         System.out.println("Hvilken id har aftalen du vil slette?");
         int id = tastatur.nextInt();
         bookinger.removeIf(b -> b.getId()== id);
         tastatur.nextLine();
 
+
     }
 
-    private static LocalDate tastDato() {
+    public static LocalDate tastDato() {
         LocalDate dato=null;
         boolean korrektdato = false;
 
@@ -73,7 +73,7 @@ public class Aftaler {
         }
         return dato;
     }
-    private static LocalDate verficerDato(){
+    public static LocalDate verficerDato(){
 
         LocalDate dato = null;
         boolean korrektdato = false;
@@ -94,9 +94,11 @@ public class Aftaler {
         return dato;
     }
     public static void seLedigeTider() {
+
         LocalDate dato = verficerDato();
 
-        System.out.println(dato);
+
+
         for (int a = 10; a < 18; a++) {
             System.out.println("Klokken: " + a + ":00");
             boolean harBooking = false;
@@ -112,8 +114,7 @@ public class Aftaler {
             }
         }
     }
-
-    private static int seTid() {
+    public static int seTid() {
         System.out.println("Hvilken tid?");
         int bookingtid = tastatur.nextInt();
         tastatur.nextLine();
@@ -123,7 +124,7 @@ public class Aftaler {
         }
         return bookingtid;
     }
-public static double seBudget(){
+    public static double seBudget(){
         double samletBeløb = 0;
 
         for (Aftaler b : bookinger){
