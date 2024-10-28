@@ -30,7 +30,7 @@ public class Aftaler {
     }
 
     public String toString() {
-        return id + " " + navn + " " + dato + " " + "klokken " + bookingtid + ":00 " + beløb + " kroner";
+        return "ID: "+id + ", " + navn + ", " + dato + ", " + "kl. " + bookingtid + ":00, " + beløb + " kr.";
     }
 
     public void opretAftaler() {
@@ -90,7 +90,6 @@ public class Aftaler {
                 System.out.println("Ugyldig dato, skriv dato (yyyy-mm-dd)");
             }
         }
-
         return dato;
     }
 
