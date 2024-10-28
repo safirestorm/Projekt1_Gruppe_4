@@ -39,36 +39,9 @@ public class Aftaler {
 
         LocalDate dato=tastDato();
 
-        /*
-        LocalDate dato = null;
-        boolean korrektdato = false;
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        while (!korrektdato){
-            System.out.println("Skriv dato (yyyy-mm-dd):" );
-             String intastetDato = tastatur.nextLine();
-
-             try {
-                 dato = LocalDate.parse(intastetDato, formatter);
-                 korrektdato = true;
-             } catch (DateTimeParseException e) {
-                 System.out.println("Ugyldig dato, skriv dato (yyyy-mm-dd)");
-             }
-        }
-
-        System.out.println("Hvilken tid?");
-        int bookingtid = tastatur.nextInt();
-        tastatur.nextLine();
-        while (bookingtid < 10 || bookingtid > 17){
-             System.out.println("Det er udenfor vores åbningstid, prøv igen.");
-             bookingtid = tastatur.nextInt();
-        }
-    */
         int bookingtid= seTid();
         bookinger.add(new Aftaler(navn,dato, bookingtid));
         System.out.println(bookinger);
-
 
     }
 
