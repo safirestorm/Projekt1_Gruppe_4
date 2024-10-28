@@ -8,70 +8,54 @@ import java.util.Scanner;
 
 public class Aftaler {
     static Scanner tastatur = new Scanner(System.in);
-    private static ArrayList<Aftaler> bookinger= new ArrayList<>();
+    static ArrayList<Aftaler> bookinger = new ArrayList<>();
     int id;
-    static int nrAftaler=0;
+    static int nrAftaler = 0;
     String navn;
     LocalDate dato;
     public int bookingtid;
     double beløb;
 
-    Aftaler(String navn, LocalDate dato, int bookingtid){
+    Aftaler(String navn, LocalDate dato, int bookingtid) {
         nrAftaler++;
-        id=nrAftaler;
+        id = nrAftaler;
         this.navn = navn;
         this.dato = dato;
         this.bookingtid = bookingtid;
         beløb = 250;
     }
-    int getId(){
+
+    int getId() {
         return id;
     }
 
     public String toString() {
-        return id+ " " + navn + " "  + dato + " " +"klokken "+ bookingtid + ":00 " + beløb +" kroner";
+        return id + " " + navn + " " + dato + " " + "klokken " + bookingtid + ":00 " + beløb + " kroner";
     }
 
-    public boolean logind(){
-        String ADGANGSKODE = "hairyharry";
-        System.out.println("indtast adgangskode for at logge ind");
-        String adgangskode = tastatur.nextLine();
-
-        if (ADGANGSKODE.equals(adgangskode)){
-            System.out.println("login succesfuldt");
-            return true;
-
-            }else {
-            System.out.println("Forkert adgangskode. Prøv igen.");
-            return false;
-        }
-    }
-
-
-
-    public void opretAftaler (){
+    public void opretAftaler() {
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
 
-        LocalDate dato=tastDato();
+        LocalDate dato = tastDato();
 
-        int bookingtid= seTid();
-        bookinger.add(new Aftaler(navn,dato, bookingtid));
+        int bookingtid = seTid();
+        bookinger.add(new Aftaler(navn, dato, bookingtid));
         System.out.println(bookinger);
 
     }
 
-    public void fjernAftaler(){
+    public void fjernAftaler() {
         seTider();
         System.out.println("Hvilken id har aftalen du vil slette?");
         int id = tastatur.nextInt();
-        bookinger.removeIf(b -> b.getId()== id);
+        bookinger.removeIf(b -> b.getId() == id);
         tastatur.nextLine();
 
     }
 
     public LocalDate tastDato() {
-        LocalDate dato=null;
+        LocalDate dato = null;
         boolean korrektdato = false;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -89,13 +73,14 @@ public class Aftaler {
         }
         return dato;
     }
-    public LocalDate verficerDato(){
+
+    public LocalDate verficerDato() {
         LocalDate dato = null;
         boolean korrektdato = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        while (!korrektdato){
-            System.out.println("Skriv dato (yyyy-mm-dd):" );
+        while (!korrektdato) {
+            System.out.println("Skriv dato (yyyy-mm-dd):");
             String intastetDato = tastatur.nextLine();
 
             try {
@@ -108,9 +93,11 @@ public class Aftaler {
 
         return dato;
     }
+
     public void seTider() {
         LocalDate dato = verficerDato();
 
+        System.out.println(dato);
         for (int a = 10; a < 18; a++) {
             System.out.println("Klokken: " + a + ":00");
             boolean harBooking = false;
@@ -118,11 +105,13 @@ public class Aftaler {
             for (Aftaler b : bookinger) {
                 if (b.dato.isEqual(dato) && b.bookingtid == a) {
                     System.out.println(b);
+                    System.out.println();
                     harBooking = true;
                 }
             }
             if (!harBooking) {
                 System.out.println("Ledig");
+                System.out.println();
             }
         }
     }
@@ -137,17 +126,23 @@ public class Aftaler {
         }
         return bookingtid;
     }
-
-    public double seBudget(){
+    public void seBudgetPrDag() {
+        LocalDate dato = verficerDato();
         double samletBeløb = 0;
 
-        for (Aftaler b : bookinger){
-           samletBeløb = b.beløb+ samletBeløb;
+        System.out.println(dato);
+        for (int a = 10; a < 18; a++) {
+            System.out.println("Klokken: " + a + ":00");
 
+            for (Aftaler b : bookinger) {
+                if (b.dato.isEqual(dato) && b.bookingtid == a) {
+                    System.out.println(b);
+                    samletBeløb = b.beløb + samletBeløb;
+                    System.out.println();
+                }
+            }
         }
-        return samletBeløb;
+        System.out.println("Samlet beløb for d."+dato+" er: "+samletBeløb+"kr.");
     }
-
 }
-
 
