@@ -32,6 +32,23 @@ public class Aftaler {
         return id+ " " + navn + " "  + dato + " " +"klokken "+ bookingtid + ":00 " + beløb +" kroner";
     }
 
+    public boolean logind(){
+        String ADGANGSKODE = "hairyharry";
+        System.out.println("indtast adgangskode for at logge ind");
+        String adgangskode = tastatur.nextLine();
+
+        if (ADGANGSKODE.equals(adgangskode)){
+            System.out.println("login succesfuldt");
+            return true;
+
+            }else {
+            System.out.println("Forkert adgangskode. Prøv igen.");
+            return false;
+        }
+    }
+
+
+
     public void opretAftaler (){
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
