@@ -32,7 +32,19 @@ public class Aftaler {
     public String toString() {
         return id + " " + navn + " " + dato + " " + "klokken " + bookingtid + ":00 " + beløb + " kroner";
     }
+    public boolean login() {
+    String ADGANGSKODE = "hairyharry";
+        System.out.println("Indtast adgangskode for at logge ind:");
+        String adgangskode = tastatur.nextLine();
 
+        if (ADGANGSKODE.equals(adgangskode)) {
+            System.out.println("Login succesfuldt!");
+            return true;
+        } else {
+            System.out.println("Forkert adgangskode. Prøv igen.");
+            return false;
+        }
+    }
     public void opretAftaler() {
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();

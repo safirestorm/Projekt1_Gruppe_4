@@ -35,8 +35,7 @@ public class Salon {
                     bookingMenu();
                     break;
                 case 2:
-                    aftale.logind();
-                    if(aftale.logind()== true){
+                    if(aftale.login()== true){
                         revisorMenu();
                     }
                 default:
