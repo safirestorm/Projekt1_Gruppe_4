@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class Kalender {
 
     public static void main(String[] args) {
-        Aftaler a1=new Aftaler("Bob",LocalDate.of(2222,11,11), 11);
-        a1.seLedigeTider();
+
+        Aftaler.seLedigeTider();
 
     }
 }

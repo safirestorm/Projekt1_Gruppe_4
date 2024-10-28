@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Aftaler {
     static Scanner tastatur = new Scanner(System.in);
-    ArrayList<Aftaler> bookinger= new ArrayList<>();
+    private static ArrayList<Aftaler> bookinger= new ArrayList<>();
     int id;
     static int nrAftaler=0;
     String navn;
@@ -32,7 +32,7 @@ public class Aftaler {
         return id+ " " + navn + " "  + dato + " " +"klokken "+ bookingtid + ":00 " + beløb +" kroner";
     }
 
-    void opretAftaler (){
+    public static void opretAftaler (){
 
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
@@ -72,7 +72,7 @@ public class Aftaler {
 
     }
 
-    void fjerAftaler(){
+    public static void fjerAftaler(){
         System.out.println("Hvilken id har aftalen du vil slette?");
         int id = tastatur.nextInt();
         bookinger.removeIf(b -> b.getId()== id);
@@ -81,7 +81,7 @@ public class Aftaler {
 
     }
 
-    LocalDate tastDato() {
+    private static LocalDate tastDato() {
         LocalDate dato=null;
         boolean korrektdato = false;
 
@@ -100,7 +100,7 @@ public class Aftaler {
         }
         return dato;
     }
-    LocalDate verficerDato(){
+    private static LocalDate verficerDato(){
 
         LocalDate dato = null;
         boolean korrektdato = false;
@@ -120,7 +120,7 @@ public class Aftaler {
 
         return dato;
     }
-    void seLedigeTider() {
+    public static void seLedigeTider() {
 
         LocalDate dato = verficerDato();
 
@@ -141,7 +141,7 @@ public class Aftaler {
             }
         }
     }
-    int seTid() {
+    private static int seTid() {
         System.out.println("Hvilken tid?");
         int bookingtid = tastatur.nextInt();
         tastatur.nextLine();
@@ -151,10 +151,20 @@ public class Aftaler {
         }
         return bookingtid;
     }
+private static double seBudget(){
+        double samletBeløb = 0;
 
+        for (Aftaler b : bookinger){
+           samletBeløb = b.beløb+ samletBeløb;
 
-    public static void main(String[] args) {
-        Aftaler a1 = new Aftaler("Bob",LocalDate.of(2024,10,23), 13);
-        System.out.println( a1);
+        }
+        return samletBeløb;
     }
+    public static void main(String[] args) {
+        opretAftaler();  // Test oprettelse af aftale
+        System.out.println("Samlet budget: " + seBudget() + " kroner");
+
+        }
 }
+
+
