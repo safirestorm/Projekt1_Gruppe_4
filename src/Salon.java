@@ -91,7 +91,7 @@ public class Salon {
             if (revisorValg == 2) break;
 
             if (revisorValg == 1){
-                aftale.seBudget();   // Fungere ikke ordenligt
+                aftale.seBudgetPrDag();
                 System.out.println();
             }
         }
