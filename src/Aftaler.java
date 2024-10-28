@@ -30,7 +30,7 @@ public class Aftaler {
     }
 
     public String toString() {
-        return id + " " + navn + " " + dato + " " + "klokken " + bookingtid + ":00 " + beløb + " kroner";
+        return "Bookingid: "+id + "\t" + navn + ", " + dato + ", " + "kl. " + bookingtid + ":00, " + beløb + " kr.";
     }
     public boolean login() {
     String ADGANGSKODE = "hairyharry";
@@ -102,7 +102,6 @@ public class Aftaler {
                 System.out.println("Ugyldig dato, skriv dato (yyyy-mm-dd)");
             }
         }
-
         return dato;
     }
 
