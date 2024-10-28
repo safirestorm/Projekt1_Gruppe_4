@@ -8,6 +8,15 @@ public class Salon {
 
     public static void main(String[] args) {
         int valg;
+        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,11,11),11));
+        Aftaler.bookinger.add(new Aftaler("Bob",LocalDate.of(2222,11,11),11));
+        Aftaler.bookinger.add(new Aftaler("Hans",LocalDate.of(2222,11,11),11));
+        Aftaler.bookinger.add(new Aftaler("Mads",LocalDate.of(2222,11,11),11));
+        Aftaler.bookinger.add(new Aftaler("Bent",LocalDate.of(2202,11,11),11));
+        Aftaler.bookinger.add(new Aftaler("Sofie",LocalDate.of(2202,11,11),11));
+
+
+
         Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,06,05), 13);
 
         while (true) {
