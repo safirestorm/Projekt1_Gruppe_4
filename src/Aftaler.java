@@ -44,8 +44,8 @@ public class Aftaler {
 
     }
 
-    public void fjerAftaler(){
-        seLedigeTider();
+    public void fjernAftaler(){
+        seTider();
         System.out.println("Hvilken id har aftalen du vil slette?");
         int id = tastatur.nextInt();
         bookinger.removeIf(b -> b.getId()== id);
@@ -91,7 +91,7 @@ public class Aftaler {
 
         return dato;
     }
-    public void seLedigeTider() {
+    public void seTider() {
         LocalDate dato = verficerDato();
 
         for (int a = 10; a < 18; a++) {

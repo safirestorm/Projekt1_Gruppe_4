@@ -50,7 +50,7 @@ public class Salon {
 
             switch (bookerValg) {
                 case 1:
-                    aftale.seLedigeTider();
+                    aftale.seTider();
                     System.out.println();
                     break;
                 case 2:
@@ -69,7 +69,7 @@ public class Salon {
                     }
                     break;
                 case 3:
-                    aftale.fjerAftaler();
+                    aftale.fjernAftaler();
                     System.out.println();
                     break;
                 default:
@@ -88,14 +88,11 @@ public class Salon {
             System.out.println("Tast 2: Gå til forrige side");
             System.out.println("Indtast et tal [1-2]");
             int revisorValg = checkOmTal();
+            if (revisorValg == 2) break;
 
-            switch (revisorValg) {
-                case 1:
-                    aftale.seBudget();
-                    System.out.println();
-                    break;
-                case 2:
-                    break;
+            if (revisorValg == 1){
+                aftale.seBudget();   // Fungere ikke ordenligt
+                System.out.println();
             }
         }
     }
