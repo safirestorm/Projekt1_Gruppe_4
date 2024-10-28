@@ -19,10 +19,9 @@ public class Salon {
             System.out.println("Indtast et tal [0-2]:");
 
             valg = checkOmTal();
+            if (valg == 0) break;
+
             switch (valg) {
-                case 0:
-                    System.out.println("Tak for idag.");
-                    break;
                 case 1:
                     bookingMenu();
                     break;
@@ -71,6 +70,7 @@ public class Salon {
                     break;
                 case 3:
                     aftale.fjerAftaler();
+                    System.out.println();
                     break;
                 default:
                     System.out.println("Ugyldigt valg, prøv igen");
@@ -82,18 +82,20 @@ public class Salon {
     static void revisorMenu(){
         Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,06,05), 13);
 
-        int revisorValg;
         while (true) {
             System.out.println("Du har nu følgende muligheder:");
             System.out.println("Tast 1: Se regnskab");
             System.out.println("Tast 2: Gå til forrige side");
             System.out.println("Indtast et tal [1-2]");
-            revisorValg = keyboard.nextInt();
-            keyboard.nextLine();
-            if (revisorValg == 2) break;
+            int revisorValg = checkOmTal();
 
-            if (revisorValg == 1) {
-
+            switch (revisorValg) {
+                case 1:
+                    aftale.seBudget();
+                    System.out.println();
+                    break;
+                case 2:
+                    break;
             }
         }
     }

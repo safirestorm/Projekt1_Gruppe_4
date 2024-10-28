@@ -32,8 +32,7 @@ public class Aftaler {
         return id+ " " + navn + " "  + dato + " " +"klokken "+ bookingtid + ":00 " + beløb +" kroner";
     }
 
-    public static void opretAftaler (){
-
+    public void opretAftaler (){
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
 
@@ -45,16 +44,16 @@ public class Aftaler {
 
     }
 
-    public static void fjerAftaler(){
+    public void fjerAftaler(){
+        seLedigeTider();
         System.out.println("Hvilken id har aftalen du vil slette?");
         int id = tastatur.nextInt();
         bookinger.removeIf(b -> b.getId()== id);
         tastatur.nextLine();
 
-
     }
 
-    public static LocalDate tastDato() {
+    public LocalDate tastDato() {
         LocalDate dato=null;
         boolean korrektdato = false;
 
@@ -73,8 +72,7 @@ public class Aftaler {
         }
         return dato;
     }
-    public static LocalDate verficerDato(){
-
+    public LocalDate verficerDato(){
         LocalDate dato = null;
         boolean korrektdato = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -93,11 +91,8 @@ public class Aftaler {
 
         return dato;
     }
-    public static void seLedigeTider() {
-
+    public void seLedigeTider() {
         LocalDate dato = verficerDato();
-
-
 
         for (int a = 10; a < 18; a++) {
             System.out.println("Klokken: " + a + ":00");
@@ -114,7 +109,8 @@ public class Aftaler {
             }
         }
     }
-    public static int seTid() {
+
+    public int seTid() {
         System.out.println("Hvilken tid?");
         int bookingtid = tastatur.nextInt();
         tastatur.nextLine();
@@ -124,7 +120,8 @@ public class Aftaler {
         }
         return bookingtid;
     }
-    public static double seBudget(){
+
+    public double seBudget(){
         double samletBeløb = 0;
 
         for (Aftaler b : bookinger){
@@ -133,11 +130,7 @@ public class Aftaler {
         }
         return samletBeløb;
     }
-    public static void main(String[] args) {
-        opretAftaler();  // Test oprettelse af aftale
-        System.out.println("Samlet budget: " + seBudget() + " kroner");
 
-        }
 }
 
 
