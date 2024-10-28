@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Aftaler {
     static Scanner tastatur = new Scanner(System.in);
-    private static ArrayList<Aftaler> bookinger = new ArrayList<>();
+    static ArrayList<Aftaler> bookinger = new ArrayList<>();
     int id;
     static int nrAftaler = 0;
     String navn;
@@ -32,7 +32,19 @@ public class Aftaler {
     public String toString() {
         return "Bookingid: "+id + "\t" + navn + ", " + dato + ", " + "kl. " + bookingtid + ":00, " + beløb + " kr.";
     }
+    public boolean login() {
+    String ADGANGSKODE = "hairyharry";
+        System.out.println("Indtast adgangskode for at logge ind:");
+        String adgangskode = tastatur.nextLine();
 
+        if (ADGANGSKODE.equals(adgangskode)) {
+            System.out.println("Login succesfuldt!");
+            return true;
+        } else {
+            System.out.println("Forkert adgangskode. Prøv igen.");
+            return false;
+        }
+    }
     public void opretAftaler() {
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
@@ -125,17 +137,6 @@ public class Aftaler {
         }
         return bookingtid;
     }
-
-    public double seBudget() {
-        double samletBeløb = 0;
-
-        for (Aftaler b : bookinger) {
-            samletBeløb = b.beløb + samletBeløb;
-
-        }
-        return samletBeløb;
-    }
-
     public void seBudgetPrDag() {
         LocalDate dato = verficerDato();
         double samletBeløb = 0;
@@ -143,14 +144,12 @@ public class Aftaler {
         System.out.println(dato);
         for (int a = 10; a < 18; a++) {
             System.out.println("Klokken: " + a + ":00");
-            boolean harBooking = false;
 
             for (Aftaler b : bookinger) {
                 if (b.dato.isEqual(dato) && b.bookingtid == a) {
                     System.out.println(b);
                     samletBeløb = b.beløb + samletBeløb;
                     System.out.println();
-                    harBooking = true;
                 }
             }
         }
