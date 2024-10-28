@@ -54,7 +54,7 @@ public class Aftaler {
 
     }
 
-    private static LocalDate tastDato() {
+    public static LocalDate tastDato() {
         LocalDate dato=null;
         boolean korrektdato = false;
 
@@ -73,7 +73,7 @@ public class Aftaler {
         }
         return dato;
     }
-    private static LocalDate verficerDato(){
+    public static LocalDate verficerDato(){
 
         LocalDate dato = null;
         boolean korrektdato = false;
@@ -114,7 +114,7 @@ public class Aftaler {
             }
         }
     }
-    private static int seTid() {
+    public static int seTid() {
         System.out.println("Hvilken tid?");
         int bookingtid = tastatur.nextInt();
         tastatur.nextLine();
@@ -124,7 +124,7 @@ public class Aftaler {
         }
         return bookingtid;
     }
-private static double seBudget(){
+    public static double seBudget(){
         double samletBeløb = 0;
 
         for (Aftaler b : bookinger){
