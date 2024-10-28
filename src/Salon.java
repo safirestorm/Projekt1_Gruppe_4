@@ -33,7 +33,6 @@ public class Salon {
                     System.out.println();
             }
         }
-
     }
 
     static void bookingMenu(){
@@ -81,6 +80,8 @@ public class Salon {
     }
 
     static void revisorMenu(){
+        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,06,05), 13);
+
         int revisorValg;
         while (true) {
             System.out.println("Du har nu følgende muligheder:");
