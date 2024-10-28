@@ -35,7 +35,9 @@ public class Salon {
                     bookingMenu();
                     break;
                 case 2:
-                    revisorMenu();
+                    if(aftale.login()== true){
+                        revisorMenu();
+                    }
                 default:
                     System.out.println("Ugyldigt valg, prøv igen");
                     System.out.println();
