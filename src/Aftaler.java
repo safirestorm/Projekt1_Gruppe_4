@@ -30,7 +30,7 @@ public class Aftaler {
     }
 
     public String toString() {
-        return "ID: "+id + ", " + navn + ", " + dato + ", " + "kl. " + bookingtid + ":00, " + beløb + " kr.";
+        return "Bookingid: "+id + "\t" + navn + ", " + dato + ", " + "kl. " + bookingtid + ":00, " + beløb + " kr.";
     }
 
     public void opretAftaler() {
