@@ -8,13 +8,13 @@ public class Salon {
 
     public static void main(String[] args) {
         int valg;
+        // Dummy aftaler
         Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,11,11),11));
         Aftaler.bookinger.add(new Aftaler("Bob",LocalDate.of(2222,11,11),11));
         Aftaler.bookinger.add(new Aftaler("Hans",LocalDate.of(2222,11,11),11));
         Aftaler.bookinger.add(new Aftaler("Mads",LocalDate.of(2222,11,11),11));
         Aftaler.bookinger.add(new Aftaler("Bent",LocalDate.of(2202,11,11),11));
         Aftaler.bookinger.add(new Aftaler("Sofie",LocalDate.of(2202,11,11),11));
-
 
 
         Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,06,05), 13);
@@ -40,9 +40,9 @@ public class Salon {
                         loggedIn = aftale.login();
                         if (loggedIn) {
                             revisorMenu();
+                            break;
                         }
                     }
-
                 default:
                     System.out.println("Ugyldigt valg, prøv igen");
                     System.out.println();
@@ -59,10 +59,10 @@ public class Salon {
             System.out.println("Tast 1: Se ledige tider");
             System.out.println("Tast 2: Opret booking");
             System.out.println("Tast 3: Slet en booking");
-            System.out.println("Tast 4: Gå til forrige side");
-            System.out.println("Indtast et tal [1-4]");
+            System.out.println("Tast 0: Gå til forrige side");
+            System.out.println("Indtast et tal [0-3]");
             int bookerValg = checkOmTal();
-            if (bookerValg == 4) break;
+            if (bookerValg == 0) break;
 
             switch (bookerValg) {
                 case 1:
@@ -101,10 +101,10 @@ public class Salon {
         while (true) {
             System.out.println("Du har nu følgende muligheder:");
             System.out.println("Tast 1: Se regnskab");
-            System.out.println("Tast 2: Gå til forrige side");
-            System.out.println("Indtast et tal [1-2]");
+            System.out.println("Tast 0: Gå til forrige side");
+            System.out.println("Indtast et tal [0-1]");
             int revisorValg = checkOmTal();
-            if (revisorValg == 2) break;
+            if (revisorValg == 0) break;
 
             if (revisorValg == 1){
                 aftale.seBudgetPrDag();
