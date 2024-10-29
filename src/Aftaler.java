@@ -54,7 +54,6 @@ public class Aftaler {
         int bookingtid = seTid();
         bookinger.add(new Aftaler(navn, dato, bookingtid));
         System.out.println(bookinger);
-
     }
 
     public void fjernAftaler() {
@@ -103,6 +102,28 @@ public class Aftaler {
             }
         }
         return dato;
+    }
+
+    public void seTider4Dagefrem(){
+        LocalDate dato = verficerDato();
+
+        System.out.println(dato);
+        for (int a = 10; a < 18; a++) {
+            System.out.println("Klokken: " + a + ":00");
+            boolean harBooking = false;
+
+            for (Aftaler b : bookinger) {
+                if(dato.isEqual(dato) && dato.isBefore(dato.plusDays(4)) && b.bookingtid == a) {
+                    System.out.println(b);
+                    System.out.println();
+                    harBooking = true;
+                }
+            }
+            if (!harBooking) {
+                System.out.println("Ledig");
+                System.out.println();
+            }
+        }
     }
 
     public void seTider() {
