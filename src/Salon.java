@@ -67,7 +67,7 @@ public class Salon {
 
             switch (bookerValg) {
                 case 1:
-                    aftale.seTider();
+                    aftale.seTider4Dagefrem();
                     System.out.println();
                     break;
                 case 2:

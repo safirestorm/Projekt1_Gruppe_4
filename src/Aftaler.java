@@ -113,7 +113,7 @@ public class Aftaler {
             boolean harBooking = false;
 
             for (Aftaler b : bookinger) {
-                if(dato.isEqual(dato) && dato.isBefore(dato.plusDays(4)) && b.bookingtid == a) {
+                if(dato.isEqual(dato) && dato.isBefore(dato.plusDays(4))) {
                     System.out.println(b);
                     System.out.println();
                     harBooking = true;
