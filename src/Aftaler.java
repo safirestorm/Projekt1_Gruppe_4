@@ -60,13 +60,13 @@ public class Aftaler {
         LavTextfilfraBookingerArray();
     }
 
-    public void fjernAftaler() {
+    public void fjernAftaler() throws IOException{
         seTider();
         System.out.println("Hvilken id har aftalen du vil slette?");
         int id = tastatur.nextInt();
         bookinger.removeIf(b -> b.getId() == id);
         tastatur.nextLine();
-
+        LavTextfilfraBookingerArray();
     }
 
     public LocalDate tastDato() {
@@ -131,14 +131,23 @@ public class Aftaler {
 
     public void seTider4Dagefrem(){
         LocalDate dato = verficerDato();
+        LocalTime tid = null;
 
         System.out.println(dato);
         for (int a = 10; a < 18; a++) {
+            if (a == 10) tid = LocalTime.of(10,0);
+            if (a == 11) tid = LocalTime.of(11,0);
+            if (a == 12) tid = LocalTime.of(12,0);
+            if (a == 13) tid = LocalTime.of(13,0);
+            if (a == 14) tid = LocalTime.of(14,0);
+            if (a == 15) tid = LocalTime.of(15,0);
+            if (a == 16) tid = LocalTime.of(16,0);
+            if (a == 17) tid = LocalTime.of(17,0);
             System.out.println("Klokken: " + a + ":00");
             boolean harBooking = false;
 
             for (Aftaler b : bookinger) {
-                if(dato.isEqual(dato) && dato.isBefore(dato.plusDays(4))) {
+                if(dato.isEqual(dato) && dato.isBefore(dato.plusDays(4)) && b.bookingtid.equals(tid)) {
                     System.out.println(b);
                     System.out.println();
                     harBooking = true;
