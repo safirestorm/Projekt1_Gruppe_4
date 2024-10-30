@@ -1,5 +1,6 @@
 package src;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -7,9 +8,10 @@ import java.util.Scanner;
 public class Salon {
     static Scanner keyboard = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int valg;
         // Dummy aftaler
+        /*
         Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,11,11), LocalTime.of(10,0)));
         Aftaler.bookinger.add(new Aftaler("Bob",LocalDate.of(2222,11,11),LocalTime.of(10,0)));
         Aftaler.bookinger.add(new Aftaler("Hans",LocalDate.of(2222,11,11),LocalTime.of(10,0)));
@@ -17,10 +19,10 @@ public class Salon {
         Aftaler.bookinger.add(new Aftaler("Bent",LocalDate.of(2202,11,11),LocalTime.of(10,0)));
         Aftaler.bookinger.add(new Aftaler("Sofie",LocalDate.of(2202,11,11),LocalTime.of(10,0)));
         Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,12,11),LocalTime.of(10,0)));
-
+        */
 
         Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
-
+        aftale.LeasTextfilerogInputIBookinger();
         while (true) {
             System.out.println("Velkommen til Harry's Salon");
             System.out.println("Hvad ønsker du at foretage dig?");
@@ -53,7 +55,7 @@ public class Salon {
         }
     }
 
-    static void bookingMenu(){
+    static void bookingMenu() throws IOException{
         Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
         String svar;
 

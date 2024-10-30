@@ -1,5 +1,6 @@
 package src;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -48,7 +49,7 @@ public class Aftaler {
         }
     }
 
-    public void opretAftaler() {
+    public void opretAftaler() throws IOException{
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
 
@@ -56,7 +57,7 @@ public class Aftaler {
 
         LocalTime bookingtid = seTid();
         bookinger.add(new Aftaler(navn, dato, bookingtid));
-        System.out.println(bookinger);
+        LavTextfilfraBookingerArray();
     }
 
     public void fjernAftaler() {
@@ -224,6 +225,57 @@ public class Aftaler {
                 System.out.println("Det er ikke muligt at se regnskabet for fremtiden, vær sød at vælge en dato før dags dato.");
                 System.out.println();
             }
+        }
+    }
+    public void LavTextfilfraBookingerArray() throws IOException{
+        FileWriter fil2 = new FileWriter("src//BookingList.txt", false);
+        PrintWriter ud2 = new PrintWriter(fil2);
+        for (Aftaler b : bookinger) {
+        //  System.out.println(b); // vise hvad der er i den indlæste String
+            int id = b.id; // Hele linjen er "0-Ole-2222,11,11-10,0-250" og her gemmer den "0"
+            String Bnavn = b.navn; // Den gemmer "1556"
+            LocalDate Bdato = b.dato; // Den gemmer "d"
+            LocalTime Btid = b.bookingtid;
+            Double beløb = b.beløb;
+
+            ud2.println(id + "\t" + Bnavn + "\t" + Bdato + "\t" + Btid + "\t" + beløb); // Her putter den det ind i textfilen som String alle typer filer kan dog sættes ind
+        }
+        ud2.close();
+    }
+    public void LeasTextfilerogInputIBookinger() throws IOException{
+        FileReader fil = new FileReader("src//BookingList.txt");
+        BufferedReader ind = new BufferedReader(fil);
+        String linje = ind.readLine(); // Laver det den læser om til en String
+        DateTimeFormatter Datoformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter Tidformatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        while (linje != null) {
+
+            //   System.out.println(linje); // vise hvad der er i den indlæste String
+            String[] bidder = linje.split("\t");
+            // String id = bidder[0]; // Hele linjen er "Peter Adams,1556,D" og her gemmer den "Peter Adams"
+            String navn = bidder[1]; // Den gemmer "1556"
+            String dato = bidder[2]; // Den gemmer "d"
+            String tid = bidder[3];
+            // String beløb = bidder[4];
+            // Integer Sid;
+
+            try {
+                // Sid = Integer.valueOf(id);
+                // int Cid = Sid;
+                LocalDate Cdato = LocalDate.parse(dato, Datoformatter);
+                LocalTime Ctid = LocalTime.parse(tid, Tidformatter);
+                // Double Cbeløb = Double.parseDouble(beløb);
+                // System.out.println("Converted integer: " +Cid+ " Dato:" +Cdato+ " Tid:" +Ctid+ " beløb:" +Cbeløb);
+                Aftaler.bookinger.add(new Aftaler(navn,Cdato, Ctid));
+
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid integer input");
+            }
+            linje = ind.readLine();
+
+
         }
     }
 }
