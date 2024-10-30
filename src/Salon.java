@@ -1,6 +1,7 @@
 package src;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Salon {
@@ -9,16 +10,16 @@ public class Salon {
     public static void main(String[] args) {
         int valg;
         // Dummy aftaler
-        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,11,11),11));
-        Aftaler.bookinger.add(new Aftaler("Bob",LocalDate.of(2222,11,11),11));
-        Aftaler.bookinger.add(new Aftaler("Hans",LocalDate.of(2222,11,11),11));
-        Aftaler.bookinger.add(new Aftaler("Mads",LocalDate.of(2222,11,11),11));
-        Aftaler.bookinger.add(new Aftaler("Bent",LocalDate.of(2202,11,11),11));
-        Aftaler.bookinger.add(new Aftaler("Sofie",LocalDate.of(2202,11,11),11));
-        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,12,11),11));
+        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,11,11), LocalTime.of(10,0)));
+        Aftaler.bookinger.add(new Aftaler("Bob",LocalDate.of(2222,11,11),LocalTime.of(10,0)));
+        Aftaler.bookinger.add(new Aftaler("Hans",LocalDate.of(2222,11,11),LocalTime.of(10,0)));
+        Aftaler.bookinger.add(new Aftaler("Mads",LocalDate.of(2222,11,11),LocalTime.of(10,0)));
+        Aftaler.bookinger.add(new Aftaler("Bent",LocalDate.of(2202,11,11),LocalTime.of(10,0)));
+        Aftaler.bookinger.add(new Aftaler("Sofie",LocalDate.of(2202,11,11),LocalTime.of(10,0)));
+        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,12,11),LocalTime.of(10,0)));
 
 
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,06,05), 13);
+        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
 
         while (true) {
             System.out.println("Velkommen til Harry's Salon");
@@ -41,9 +42,10 @@ public class Salon {
                         loggedIn = aftale.login();
                         if (loggedIn) {
                             revisorMenu();
-                            break;
                         }
                     }
+                    System.out.println();
+                    break;
                 default:
                     System.out.println("Ugyldigt valg, prøv igen");
                     System.out.println();
@@ -52,7 +54,7 @@ public class Salon {
     }
 
     static void bookingMenu(){
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,06,05), 13);
+        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
         String svar;
 
         while (true) {
@@ -91,13 +93,12 @@ public class Salon {
                     break;
                 default:
                     System.out.println("Ugyldigt valg, prøv igen");
-                    continue;
             }
         }
     }
 
     static void revisorMenu(){
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,06,05), 13);
+        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
 
         while (true) {
             System.out.println("Du har nu følgende muligheder:");

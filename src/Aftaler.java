@@ -1,6 +1,7 @@
 package src;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ public class Aftaler {
     static int nrAftaler = 0;
     String navn;
     LocalDate dato;
-    public int bookingtid;
+    public LocalTime bookingtid;
     double beløb;
 
-    Aftaler(String navn, LocalDate dato, int bookingtid) {
+    Aftaler(String navn, LocalDate dato, LocalTime bookingtid) {
         nrAftaler++;
         id = nrAftaler;
         this.navn = navn;
@@ -32,6 +33,7 @@ public class Aftaler {
     public String toString() {
         return "Bookingid: "+id + "\t" + navn + ", " + dato + ", " + "kl. " + bookingtid + ":00, " + beløb + " kr.";
     }
+
     public boolean login() {
     String ADGANGSKODE = "hairyharry";
         System.out.println("Indtast adgangskode for at logge ind:");
@@ -45,13 +47,14 @@ public class Aftaler {
             return false;
         }
     }
+
     public void opretAftaler() {
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
 
         LocalDate dato = tastDato();
 
-        int bookingtid = seTid();
+        LocalTime bookingtid = seTid();
         bookinger.add(new Aftaler(navn, dato, bookingtid));
         System.out.println(bookinger);
     }
@@ -83,6 +86,27 @@ public class Aftaler {
             }
         }
         return dato;
+    }
+
+    public static LocalTime tastTid(){
+        LocalTime tid = null;
+        boolean korrektTid = false;
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("10:00");
+
+        while (!korrektTid){
+            System.out.println("Skriv tid (hh:mm)");
+            String indtastetTid = tastatur.nextLine();
+
+            try {
+                tid = LocalTime.parse(indtastetTid);
+                korrektTid = true;
+            } catch (RuntimeException e) {
+                System.out.println("Ugyldig tid, skriv tid (hh:mm)");
+            }
+
+        }
+        return tid;
     }
 
     public LocalDate verficerDato() {
@@ -128,14 +152,23 @@ public class Aftaler {
 
     public void seTider() {
         LocalDate dato = verficerDato();
+        LocalTime tid = null;
 
         System.out.println(dato);
         for (int a = 10; a < 18; a++) {
+            if (a == 10) tid = LocalTime.of(10,0);
+            if (a == 11) tid = LocalTime.of(11,0);
+            if (a == 12) tid = LocalTime.of(12,0);
+            if (a == 13) tid = LocalTime.of(13,0);
+            if (a == 14) tid = LocalTime.of(14,0);
+            if (a == 15) tid = LocalTime.of(15,0);
+            if (a == 16) tid = LocalTime.of(16,0);
+            if (a == 17) tid = LocalTime.of(17,0);
             System.out.println("Klokken: " + a + ":00");
             boolean harBooking = false;
 
             for (Aftaler b : bookinger) {
-                if (b.dato.isEqual(dato) && b.bookingtid == a) {
+                if (b.dato.isEqual(dato) && b.bookingtid.equals(tid)) {
                     System.out.println(b);
                     System.out.println();
                     harBooking = true;
@@ -148,33 +181,50 @@ public class Aftaler {
         }
     }
 
-    public int seTid() {
+    public LocalTime seTid() {
         System.out.println("Hvilken tid?");
-        int bookingtid = tastatur.nextInt();
-        tastatur.nextLine();
-        while (bookingtid < 10 || bookingtid > 17) {
+        LocalTime bookingtid = tastTid();
+        while (bookingtid.isBefore(LocalTime.of(10,0))  || bookingtid.isAfter(LocalTime.of(17,0))) {
             System.out.println("Det er udenfor vores åbningstid, prøv igen.");
-            bookingtid = tastatur.nextInt();
+            bookingtid = tastTid();
         }
         return bookingtid;
     }
+
     public void seBudgetPrDag() {
-        LocalDate dato = verficerDato();
-        double samletBeløb = 0;
+        while (true) {
+            LocalDate dato = verficerDato();
+            double samletBeløb = 0;
+            LocalTime tid = null;
 
-        System.out.println(dato);
-        for (int a = 10; a < 18; a++) {
-            System.out.println("Klokken: " + a + ":00");
+            if (dato.isBefore(LocalDate.now())) {
+                System.out.println(dato);
+                for (int a = 10; a < 18; a++) {
+                    if (a == 10) tid = LocalTime.of(10, 0);
+                    if (a == 11) tid = LocalTime.of(11, 0);
+                    if (a == 12) tid = LocalTime.of(12, 0);
+                    if (a == 13) tid = LocalTime.of(13, 0);
+                    if (a == 14) tid = LocalTime.of(14, 0);
+                    if (a == 15) tid = LocalTime.of(15, 0);
+                    if (a == 16) tid = LocalTime.of(16, 0);
+                    if (a == 17) tid = LocalTime.of(17, 0);
+                    System.out.println("Klokken: " + a + ":00");
 
-            for (Aftaler b : bookinger) {
-                if (b.dato.isEqual(dato) && b.bookingtid == a) {
-                    System.out.println(b);
-                    samletBeløb = b.beløb + samletBeløb;
-                    System.out.println();
+                    for (Aftaler b : bookinger) {
+                        if (b.dato.isEqual(dato) && b.bookingtid.equals(tid)) {
+                            System.out.println(b);
+                            samletBeløb = b.beløb + samletBeløb;
+                            System.out.println();
+                        }
+                    }
                 }
+                System.out.println("Samlet beløb for d." + dato + " er: " + samletBeløb + "kr.");
+                break;
+            } else {
+                System.out.println("Det er ikke muligt at se regnskabet for fremtiden, vær sød at vælge en dato før dags dato.");
+                System.out.println();
             }
         }
-        System.out.println("Samlet beløb for d."+dato+" er: "+samletBeløb+"kr.");
     }
 }
 

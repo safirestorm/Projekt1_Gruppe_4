@@ -10,8 +10,6 @@ public class Booker {
 
     public static void main(String[] args) {
 
-        Aftaler a1=new Aftaler("bob",LocalDate.of(2222,11,11),11);
-        a1.seTider();
 
 
 
