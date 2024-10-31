@@ -62,9 +62,19 @@ public class Aftaler {
         boolean kredit;
         LocalTime bookingtid = seTid();
         System.out.println("Er bookingen Kredit? (true/false)");
+        boolean optaget = false;
         try {
             kredit = tastatur.nextBoolean();
-            bookinger.add(new Aftaler(navn, dato, bookingtid, kredit));
+
+            for(Aftaler b: bookinger) {
+                while (dato != b.dato && bookingtid != b.bookingtid) {
+                    bookinger.add(new Aftaler(navn, dato, bookingtid, kredit));
+                }
+                if(optaget == false) {
+                    System.out.println("Der er allerede en booking på den ønskede tid");
+                    optaget = true;
+                }
+            }
         } catch (Exception e){
             System.out.println("Prøv igen");
         }
