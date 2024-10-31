@@ -248,56 +248,50 @@ public class Aftaler {
         }
     }
     public void lavTextfilfraBookingerArray() throws IOException{
-        FileWriter fil2 = new FileWriter("src//BookingList.txt", false);
-        PrintWriter ud2 = new PrintWriter(fil2);
-        for (Aftaler b : bookinger) {
-            //  System.out.println(b); // vise hvad der er i den indlæste String
-            int id = b.id; // Hele linjen er "0-Ole-2222,11,11-10,0-250" og her gemmer den "0"
-            String Bnavn = b.navn; // Den gemmer "1556"
-            LocalDate Bdato = b.dato; // Den gemmer "d"
-            LocalTime Btid = b.bookingtid;
-            Double beløb = b.beløb;
-            boolean kredit = b.kredit;
+        FileWriter fil2 = new FileWriter("src//BookingList.txt", false);                        // Her finder den BookingListen
+        PrintWriter ud2 = new PrintWriter(fil2);                                                // Her laver jeg en variabel som printer alt ind filen som en String
+        for (Aftaler b : bookinger) {                                                           // Her finder jeg alle bookinger i console
+            int id = b.id;                                                                      // Her Laver jeg en variabel som sætter id'et fra en a bookingerne ind i den
+            String Bnavn = b.navn;                                                              // samme her men med navn
+            LocalDate Bdato = b.dato;                                                           // -||- dato
+            LocalTime Btid = b.bookingtid;                                                      // -||- tid
+            Double beløb = b.beløb;                                                             // -||- beløb
+            boolean kredit = b.kredit;                                                          // -||- kredit
 
-            ud2.println(id + "\t" + Bnavn + "\t" + Bdato + "\t" + Btid + "\t" + beløb + "\t" + kredit); // Her putter den det ind i textfilen som String alle typer filer kan dog sættes ind
+            ud2.println(id + "\t" + Bnavn + "\t" + Bdato + "\t" + Btid + "\t" + beløb + "\t" + kredit); // Her bruger jeg printer variablen til at putte alle variablerne ind i textfilen.
         }
-        ud2.close();
+        ud2.close();                                                                            // Her stopper jeg printeren
     }
     public void leasTextfilerogInputIBookinger() throws IOException{
-        FileReader fil = new FileReader("src//BookingList.txt");
-        BufferedReader ind = new BufferedReader(fil);
-        String linje = ind.readLine(); // Laver det den læser om til en String
-        DateTimeFormatter Datoformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter Tidformatter = DateTimeFormatter.ofPattern("HH:mm");
+        FileReader fil = new FileReader("src//BookingList.txt");                                // Her finder den en BookingListen og læser den
+        BufferedReader ind = new BufferedReader(fil);                                           // Her laver jeg en variabel som kan læse det der er i BookingListen og oversætter det til en String
+        String linje = ind.readLine();                                                          // Her putter jeg det BufferedReader har læst ind i en String
+        DateTimeFormatter Datoformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");            // Her laver jeg en variabel som kan oversætte en String om til en Dato format
+        DateTimeFormatter Tidformatter = DateTimeFormatter.ofPattern("HH:mm");                  // Her laver jeg en variabel som kan oversætte en String om til en tid format
 
-        while (linje != null) {
+        while (linje != null) {                                                                 //Her køre while løkken så længe der er noget i BufferedReader
 
-            //   System.out.println(linje); // vise hvad der er i den indlæste String
-            String[] bidder = linje.split("\t");
-            // String id = bidder[0]; // Hele linjen er "Peter Adams,1556,D" og her gemmer den "Peter Adams"
-            String navn = bidder[1]; // Den gemmer "1556"
-            String dato = bidder[2]; // Den gemmer "d"
+            String[] bidder = linje.split("\t");                                                //Her laver jeg en Array som deler alle orderne op, hver gang der er et "Tap" i textfilen
+            // String id = bidder[0];                                                           //Bruger den ikke fordi vi automatisk putter id i vores constructor
+            String navn = bidder[1];
+            String dato = bidder[2];
             String tid = bidder[3];
-            // String beløb = bidder[4];
+            // String beløb = bidder[4];                                                        //Samme her
             boolean kredit = Boolean.parseBoolean(bidder[5]);
             // Integer Sid;
             try {
                 // Sid = Integer.valueOf(id);
                 // int Cid = Sid;
-                LocalDate Cdato = LocalDate.parse(dato, Datoformatter);
-                LocalTime Ctid = LocalTime.parse(tid, Tidformatter);
-
+                LocalDate Cdato = LocalDate.parse(dato, Datoformatter);                         //Her tager jeg Stringen dato og formattere om til en LocalDate som jeg putter i Cdato
+                LocalTime Ctid = LocalTime.parse(tid, Tidformatter);                            //Her tager jeg Stringen tid og formattere om til en LocalTime som jeg putter i Ctid
                 // Double Cbeløb = Double.parseDouble(beløb);
-                // System.out.println("Converted integer: " +Cid+ " Dato:" +Cdato+ " Tid:" +Ctid+ " beløb:" +Cbeløb);
-                Aftaler.bookinger.add(new Aftaler(navn,Cdato, Ctid, kredit));
+                Aftaler.bookinger.add(new Aftaler(navn,Cdato, Ctid, kredit));                   //Her putter jeg alle de navn og alle de formatteret ind i vores bookinger
 
 
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {                                                 // Her fanger den hvis noget i Stringen ikke er rigtigt
                 System.out.println("Invalid integer input");
             }
-            linje = ind.readLine();
-
-
+            linje = ind.readLine();                                                             //Her Starter den om igen
         }
 
     }
