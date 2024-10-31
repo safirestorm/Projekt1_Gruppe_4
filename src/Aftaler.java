@@ -63,13 +63,13 @@ public class Aftaler {
         LocalTime bookingtid = seTid();
         System.out.println("Er bookingen Kredit? (true/false)");
         try {
-             kredit = tastatur.nextBoolean();
+            kredit = tastatur.nextBoolean();
             bookinger.add(new Aftaler(navn, dato, bookingtid, kredit));
         } catch (Exception e){
             System.out.println("Prøv igen");
         }
 
-        LavTextfilfraBookingerArray();
+        lavTextfilfraBookingerArray();
     }
 
     public void fjernAftaler() throws IOException{
@@ -78,7 +78,7 @@ public class Aftaler {
         int id = tastatur.nextInt();
         bookinger.removeIf(b -> b.getId() == id);
         tastatur.nextLine();
-        LavTextfilfraBookingerArray();
+        lavTextfilfraBookingerArray();
     }
 
     public LocalDate tastDato() {
@@ -258,7 +258,7 @@ public class Aftaler {
             }
         }
     }
-    public void LavTextfilfraBookingerArray() throws IOException{
+    public void lavTextfilfraBookingerArray() throws IOException{
         FileWriter fil2 = new FileWriter("src//BookingList.txt", false);
         PrintWriter ud2 = new PrintWriter(fil2);
         for (Aftaler b : bookinger) {
@@ -274,7 +274,7 @@ public class Aftaler {
         }
         ud2.close();
     }
-    public void LeasTextfilerogInputIBookinger() throws IOException{
+    public void leasTextfilerogInputIBookinger() throws IOException{
         FileReader fil = new FileReader("src//BookingList.txt");
         BufferedReader ind = new BufferedReader(fil);
         String linje = ind.readLine(); // Laver det den læser om til en String
@@ -289,10 +289,9 @@ public class Aftaler {
             String navn = bidder[1]; // Den gemmer "1556"
             String dato = bidder[2]; // Den gemmer "d"
             String tid = bidder[3];
-            String beløb = bidder[4];
+            // String beløb = bidder[4];
             boolean kredit = Boolean.parseBoolean(bidder[5]);
             // Integer Sid;
-            System.out.println(bidder[5]);
             try {
                 // Sid = Integer.valueOf(id);
                 // int Cid = Sid;

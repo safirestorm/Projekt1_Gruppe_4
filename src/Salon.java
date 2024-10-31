@@ -8,21 +8,23 @@ import java.util.Scanner;
 public class Salon {
     static Scanner keyboard = new Scanner(System.in);
 
+
+
     public static void main(String[] args) throws IOException {
         int valg;
         // Dummy aftaler
         /*
-        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,11,11), LocalTime.of(10,0)));
-        Aftaler.bookinger.add(new Aftaler("Bob",LocalDate.of(2222,11,11),LocalTime.of(10,0)));
-        Aftaler.bookinger.add(new Aftaler("Hans",LocalDate.of(2222,11,11),LocalTime.of(10,0)));
-        Aftaler.bookinger.add(new Aftaler("Mads",LocalDate.of(2222,11,11),LocalTime.of(10,0)));
-        Aftaler.bookinger.add(new Aftaler("Bent",LocalDate.of(2202,11,11),LocalTime.of(10,0)));
-        Aftaler.bookinger.add(new Aftaler("Sofie",LocalDate.of(2202,11,11),LocalTime.of(10,0)));
-        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,12,11),LocalTime.of(10,0)));
+        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,11,11), LocalTime.of(10,0),true));
+        Aftaler.bookinger.add(new Aftaler("Bob",LocalDate.of(2222,11,11),LocalTime.of(10,0),true));
+        Aftaler.bookinger.add(new Aftaler("Hans",LocalDate.of(2222,11,11),LocalTime.of(10,0),true));
+        Aftaler.bookinger.add(new Aftaler("Mads",LocalDate.of(2222,11,11),LocalTime.of(10,0),true));
+        Aftaler.bookinger.add(new Aftaler("Bent",LocalDate.of(2202,11,11),LocalTime.of(10,0),true));
+        Aftaler.bookinger.add(new Aftaler("Sofie",LocalDate.of(2202,11,11),LocalTime.of(10,0),true));
+        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,12,11),LocalTime.of(10,0),true));
         */
 
         Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
-        aftale.LeasTextfilerogInputIBookinger();
+        aftale.leasTextfilerogInputIBookinger();
 
         System.out.println(Aftaler.bookinger);
 
