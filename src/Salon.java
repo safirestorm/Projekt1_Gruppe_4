@@ -23,6 +23,9 @@ public class Salon {
 
         Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
         aftale.LeasTextfilerogInputIBookinger();
+
+        System.out.println(Aftaler.bookinger);
+
         while (true) {
             System.out.println("Velkommen til Harry's Salon");
             System.out.println("Hvad ønsker du at foretage dig?");
@@ -64,6 +67,7 @@ public class Salon {
             System.out.println("Tast 1: Se ledige tider");
             System.out.println("Tast 2: Opret booking");
             System.out.println("Tast 3: Slet en booking");
+            System.out.println("Tast 4: Rediger booking");
             System.out.println("Tast 0: Gå til forrige side");
             System.out.println("Indtast et tal [0-3]");
             int bookerValg = checkOmTal();
@@ -93,6 +97,8 @@ public class Salon {
                     aftale.fjernAftaler();
                     System.out.println();
                     break;
+                case 4:
+                    aftale.ekstraKøb();
                 default:
                     System.out.println("Ugyldigt valg, prøv igen");
             }
