@@ -141,52 +141,39 @@ public class Aftaler {
         return dato;
     }
 
-    public void seTider4Dagefrem(){
-        LocalDate dato = verficerDato();
-        LocalTime tid = null;
+    public void seTider4Dagefrem() {
+        LocalDate startDato = verficerDato();
 
-        System.out.println(dato);
-        for (int a = 10; a < 18; a++) {
-            if (a == 10) tid = LocalTime.of(10,0);
-            if (a == 11) tid = LocalTime.of(11,0);
-            if (a == 12) tid = LocalTime.of(12,0);
-            if (a == 13) tid = LocalTime.of(13,0);
-            if (a == 14) tid = LocalTime.of(14,0);
-            if (a == 15) tid = LocalTime.of(15,0);
-            if (a == 16) tid = LocalTime.of(16,0);
-            if (a == 17) tid = LocalTime.of(17,0);
-            System.out.println("Klokken: " + a + ":00");
-            boolean harBooking = false;
+        for (int flereDage = 0; flereDage <= 4; flereDage++) {
+            LocalDate dato = startDato.plusDays(flereDage);
+            System.out.println(dato);
+            for (int a = 10; a < 18; a++) {
+                LocalTime tid = LocalTime.of(a, 0);
+                System.out.println("Klokken: " + tid);
+                boolean harBooking = false;
 
-            for (Aftaler b : bookinger) {
-                if(dato.isEqual(dato) && dato.isBefore(dato.plusDays(4)) && b.bookingtid.equals(tid)) {
-                    System.out.println(b);
-                    System.out.println();
-                    harBooking = true;
+                for (Aftaler b : bookinger) {
+                    if (b.dato.isEqual(dato) && b.bookingtid.equals(tid)) {
+                        System.out.println(b);
+                        System.out.println();
+                        harBooking = true;
+                    }
                 }
-            }
-            if (!harBooking) {
-                System.out.println("Ledig");
-                System.out.println();
+                if (!harBooking) {
+                    System.out.println("Ledig");
+                    System.out.println();
+                }
             }
         }
     }
 
     public void seTider() {
         LocalDate dato = verficerDato();
-        LocalTime tid = null;
 
         System.out.println(dato);
         for (int a = 10; a < 18; a++) {
-            if (a == 10) tid = LocalTime.of(10,0);
-            if (a == 11) tid = LocalTime.of(11,0);
-            if (a == 12) tid = LocalTime.of(12,0);
-            if (a == 13) tid = LocalTime.of(13,0);
-            if (a == 14) tid = LocalTime.of(14,0);
-            if (a == 15) tid = LocalTime.of(15,0);
-            if (a == 16) tid = LocalTime.of(16,0);
-            if (a == 17) tid = LocalTime.of(17,0);
-            System.out.println("Klokken: " + a + ":00");
+            LocalTime tid = LocalTime.of(a,0);
+            System.out.println("Klokken: " + tid);
             boolean harBooking = false;
 
             for (Aftaler b : bookinger) {
@@ -219,20 +206,12 @@ public class Aftaler {
             double betaltBeløb = 0;
             double mangledeBeløb = 0;
             double samletBeløb = 0;
-            LocalTime tid = null;
 
             if (dato.isBefore(LocalDate.now())) {
                 System.out.println(dato);
                 for (int a = 10; a < 18; a++) {
-                    if (a == 10) tid = LocalTime.of(10, 0);
-                    if (a == 11) tid = LocalTime.of(11, 0);
-                    if (a == 12) tid = LocalTime.of(12, 0);
-                    if (a == 13) tid = LocalTime.of(13, 0);
-                    if (a == 14) tid = LocalTime.of(14, 0);
-                    if (a == 15) tid = LocalTime.of(15, 0);
-                    if (a == 16) tid = LocalTime.of(16, 0);
-                    if (a == 17) tid = LocalTime.of(17, 0);
-                    System.out.println("Klokken: " + a + ":00");
+                    LocalTime tid = LocalTime.of(a,0);
+                    System.out.println("Klokken: " + tid);
 
                     for (Aftaler b : bookinger) {
                         if (b.dato.isEqual(dato) && b.bookingtid.equals(tid)) {
