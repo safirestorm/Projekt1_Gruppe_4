@@ -21,7 +21,7 @@ public class Salon {
         Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,12,11),LocalTime.of(10,0)));
         */
 
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
+        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
         aftale.LeasTextfilerogInputIBookinger();
 
         System.out.println(Aftaler.bookinger);
@@ -59,7 +59,7 @@ public class Salon {
     }
 
     static void bookingMenu() throws IOException{
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
+        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
         String svar;
 
         while (true) {
@@ -106,7 +106,7 @@ public class Salon {
     }
 
     static void revisorMenu(){
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
+        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
 
         while (true) {
             System.out.println("Du har nu følgende muligheder:");
