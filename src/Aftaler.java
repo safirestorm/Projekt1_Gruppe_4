@@ -8,8 +8,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static src.Salon.checkOmTal;
-
 public class Aftaler {
     static Scanner tastatur = new Scanner(System.in);
     static ArrayList<Aftaler> bookinger = new ArrayList<>();
@@ -19,14 +17,16 @@ public class Aftaler {
     LocalDate dato;
     public LocalTime bookingtid;
     double beløb;
+    boolean kredit;
 
-    Aftaler(String navn, LocalDate dato, LocalTime bookingtid) {
+    Aftaler(String navn, LocalDate dato, LocalTime bookingtid, boolean kredit) {
         nrAftaler++;
         id = nrAftaler;
         this.navn = navn;
         this.dato = dato;
         this.bookingtid = bookingtid;
         beløb = 250;
+        this.kredit = kredit;
     }
 
     int getId() {
@@ -34,7 +34,7 @@ public class Aftaler {
     }
 
     public String toString() {
-        return "Bookingid: " + id + "\t" + navn + ", " + dato + ", " + "kl. " + bookingtid + ":00, " + beløb + " kr.";
+        return "Bookingid: "+id + "\t" + navn + ", " + dato + ", " + "kl. " + bookingtid + ":00, " + beløb + " kr.";
     }
 
     public boolean login() {
@@ -51,18 +51,20 @@ public class Aftaler {
         }
     }
 
-    public void opretAftaler() throws IOException {
+    public void opretAftaler() throws IOException{
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
 
         LocalDate dato = tastDato();
 
         LocalTime bookingtid = seTid();
-        bookinger.add(new Aftaler(navn, dato, bookingtid));
+        System.out.println("Er bookingen betalt?");
+        boolean kredit = tastatur.nextBoolean();
+        bookinger.add(new Aftaler(navn, dato, bookingtid, kredit));
         LavTextfilfraBookingerArray();
     }
 
-    public void fjernAftaler() throws IOException {
+    public void fjernAftaler() throws IOException{
         seTider();
         System.out.println("Hvilken id har aftalen du vil slette?");
         int id = tastatur.nextInt();
@@ -91,13 +93,13 @@ public class Aftaler {
         return dato;
     }
 
-    public static LocalTime tastTid() {
+    public static LocalTime tastTid(){
         LocalTime tid = null;
         boolean korrektTid = false;
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("10:00");
 
-        while (!korrektTid) {
+        while (!korrektTid){
             System.out.println("Skriv tid (hh:mm)");
             String indtastetTid = tastatur.nextLine();
 
@@ -131,25 +133,25 @@ public class Aftaler {
         return dato;
     }
 
-    public void seTider4Dagefrem() {
+    public void seTider4Dagefrem(){
         LocalDate dato = verficerDato();
         LocalTime tid = null;
 
         System.out.println(dato);
         for (int a = 10; a < 18; a++) {
-            if (a == 10) tid = LocalTime.of(10, 0);
-            if (a == 11) tid = LocalTime.of(11, 0);
-            if (a == 12) tid = LocalTime.of(12, 0);
-            if (a == 13) tid = LocalTime.of(13, 0);
-            if (a == 14) tid = LocalTime.of(14, 0);
-            if (a == 15) tid = LocalTime.of(15, 0);
-            if (a == 16) tid = LocalTime.of(16, 0);
-            if (a == 17) tid = LocalTime.of(17, 0);
+            if (a == 10) tid = LocalTime.of(10,0);
+            if (a == 11) tid = LocalTime.of(11,0);
+            if (a == 12) tid = LocalTime.of(12,0);
+            if (a == 13) tid = LocalTime.of(13,0);
+            if (a == 14) tid = LocalTime.of(14,0);
+            if (a == 15) tid = LocalTime.of(15,0);
+            if (a == 16) tid = LocalTime.of(16,0);
+            if (a == 17) tid = LocalTime.of(17,0);
             System.out.println("Klokken: " + a + ":00");
             boolean harBooking = false;
 
             for (Aftaler b : bookinger) {
-                if (dato.isEqual(dato) && dato.isBefore(dato.plusDays(4)) && b.bookingtid.equals(tid)) {
+                if(dato.isEqual(dato) && dato.isBefore(dato.plusDays(4)) && b.bookingtid.equals(tid)) {
                     System.out.println(b);
                     System.out.println();
                     harBooking = true;
@@ -168,14 +170,14 @@ public class Aftaler {
 
         System.out.println(dato);
         for (int a = 10; a < 18; a++) {
-            if (a == 10) tid = LocalTime.of(10, 0);
-            if (a == 11) tid = LocalTime.of(11, 0);
-            if (a == 12) tid = LocalTime.of(12, 0);
-            if (a == 13) tid = LocalTime.of(13, 0);
-            if (a == 14) tid = LocalTime.of(14, 0);
-            if (a == 15) tid = LocalTime.of(15, 0);
-            if (a == 16) tid = LocalTime.of(16, 0);
-            if (a == 17) tid = LocalTime.of(17, 0);
+            if (a == 10) tid = LocalTime.of(10,0);
+            if (a == 11) tid = LocalTime.of(11,0);
+            if (a == 12) tid = LocalTime.of(12,0);
+            if (a == 13) tid = LocalTime.of(13,0);
+            if (a == 14) tid = LocalTime.of(14,0);
+            if (a == 15) tid = LocalTime.of(15,0);
+            if (a == 16) tid = LocalTime.of(16,0);
+            if (a == 17) tid = LocalTime.of(17,0);
             System.out.println("Klokken: " + a + ":00");
             boolean harBooking = false;
 
@@ -196,7 +198,7 @@ public class Aftaler {
     public LocalTime seTid() {
         System.out.println("Hvilken tid?");
         LocalTime bookingtid = tastTid();
-        while (bookingtid.isBefore(LocalTime.of(10, 0)) || bookingtid.isAfter(LocalTime.of(17, 0))) {
+        while (bookingtid.isBefore(LocalTime.of(10,0))  || bookingtid.isAfter(LocalTime.of(17,0))) {
             System.out.println("Det er udenfor vores åbningstid, prøv igen.");
             bookingtid = tastTid();
         }
@@ -224,7 +226,15 @@ public class Aftaler {
 
                     for (Aftaler b : bookinger) {
                         if (b.dato.isEqual(dato) && b.bookingtid.equals(tid)) {
-                            System.out.println(b);
+
+                            if (b.kredit = true ) {
+                                samletBeløb += b.beløb;
+                                System.out.println(b);
+                            } else {
+                                samletBeløb += b.beløb;
+                                System.out.println("Mangler betaling: 250 kr. som ikke er betalt.");
+                            }
+
                             samletBeløb = b.beløb + samletBeløb;
                             System.out.println();
                         }
@@ -238,8 +248,7 @@ public class Aftaler {
             }
         }
     }
-
-    public void LavTextfilfraBookingerArray() throws IOException {
+    public void LavTextfilfraBookingerArray() throws IOException{
         FileWriter fil2 = new FileWriter("src//BookingList.txt", false);
         PrintWriter ud2 = new PrintWriter(fil2);
         for (Aftaler b : bookinger) {
@@ -249,13 +258,13 @@ public class Aftaler {
             LocalDate Bdato = b.dato; // Den gemmer "d"
             LocalTime Btid = b.bookingtid;
             Double beløb = b.beløb;
+            boolean kredit = b.kredit;
 
-            ud2.println(id + "\t" + Bnavn + "\t" + Bdato + "\t" + Btid + "\t" + beløb); // Her putter den det ind i textfilen som String alle typer filer kan dog sættes ind
+            ud2.println(id + "\t" + Bnavn + "\t" + Bdato + "\t" + Btid + "\t" + beløb + "\t" + kredit); // Her putter den det ind i textfilen som String alle typer filer kan dog sættes ind
         }
         ud2.close();
     }
-
-    public void LeasTextfilerogInputIBookinger() throws IOException {
+    public void LeasTextfilerogInputIBookinger() throws IOException{
         FileReader fil = new FileReader("src//BookingList.txt");
         BufferedReader ind = new BufferedReader(fil);
         String linje = ind.readLine(); // Laver det den læser om til en String
@@ -270,17 +279,19 @@ public class Aftaler {
             String navn = bidder[1]; // Den gemmer "1556"
             String dato = bidder[2]; // Den gemmer "d"
             String tid = bidder[3];
-            // String beløb = bidder[4];
+            String beløb = bidder[4];
+            boolean kredit;
             // Integer Sid;
 
             try {
                 // Sid = Integer.valueOf(id);
                 // int Cid = Sid;
+                kredit = Boolean.parseBoolean(bidder[5]);
                 LocalDate Cdato = LocalDate.parse(dato, Datoformatter);
                 LocalTime Ctid = LocalTime.parse(tid, Tidformatter);
                 // Double Cbeløb = Double.parseDouble(beløb);
                 // System.out.println("Converted integer: " +Cid+ " Dato:" +Cdato+ " Tid:" +Ctid+ " beløb:" +Cbeløb);
-                Aftaler.bookinger.add(new Aftaler(navn, Cdato, Ctid));
+                Aftaler.bookinger.add(new Aftaler(navn,Cdato, Ctid, kredit));
 
 
             } catch (NumberFormatException e) {
@@ -291,53 +302,4 @@ public class Aftaler {
 
         }
     }
-
-        public void ekstraKøb() {
-            double børste = 100;
-            double shampoo = 150;
-            double voks = 120;
-            double samletEkstra = 0;
-            double iAlt;
-            int valg;
-
-            seTider();
-            System.out.println("Hvilken id har aftalen du vil redigerer?");
-            int id = tastatur.nextInt();
-            System.out.println("Har kunden tilkøbt ekstra produkter?");
-            System.out.println("Tast 1: Ja");
-            System.out.println("Tast 0: Nej");
-            valg = checkOmTal();
-
-
-            while (valg == 1 | valg == 2 | valg == 3) {
-                System.out.println("Hvad har kunden tilkøbt?");
-                System.out.println("Tast 1: Børste");
-                System.out.println("Tast 2: Shampoo");
-                System.out.println("Tast 3: Voks");
-                System.out.println("Tast 4: Gå til forrige side");
-                valg = checkOmTal();
-
-                if (valg == 1) {
-                    samletEkstra = samletEkstra + børste;
-                }
-                if (valg == 2) {
-                    samletEkstra = samletEkstra + shampoo;
-                }
-                if (valg == 3) {
-                    samletEkstra = samletEkstra + voks;
-                }
-                iAlt = samletEkstra + beløb;
-                for(Aftaler aftale : bookinger) {
-                    if (aftale.getId() == id) {
-                        aftale.beløb = iAlt;
-                    }
-                }
-                System.out.println("Ekstra tilkøb for kunden er: " + samletEkstra); //Det skal ind i arraylisten
-                System.out.println("Kundens samlede beløb er: " + iAlt);
-            }
-            if (valg == 0) {
-                System.out.println("Nærrig");
-            }
-        }
-    }
-
+}
