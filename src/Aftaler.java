@@ -57,11 +57,15 @@ public class Aftaler {
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
 
+
         LocalDate dato = tastDato();
 
         LocalTime bookingtid = seTid();
-        System.out.println("Er bookingen betalt?");
+        System.out.println("Er bookingen betalt? (true/false)");
         boolean kredit = tastatur.nextBoolean();
+       // while (vaelgEtSvar){
+        //    boolean kredit = tastatur.nextBoolean();
+
         bookinger.add(new Aftaler(navn, dato, bookingtid, kredit));
         LavTextfilfraBookingerArray();
     }
@@ -210,6 +214,8 @@ public class Aftaler {
     public void seBudgetPrDag() {
         while (true) {
             LocalDate dato = verficerDato();
+            double betaltBeløb = 0;
+            double mangledeBeløb = 0;
             double samletBeløb = 0;
             LocalTime tid = null;
 
@@ -230,19 +236,19 @@ public class Aftaler {
                         if (b.dato.isEqual(dato) && b.bookingtid.equals(tid)) {
 
                             if (b.kredit = true ) {
-                                samletBeløb += b.beløb;
+                                betaltBeløb += b.beløb;
                                 System.out.println(b);
-                            } else {
-                                samletBeløb += b.beløb;
+                            }
+                            if (b.kredit = false) {
+                                mangledeBeløb += b.beløb;
+                                System.out.println(b);
                                 System.out.println("Mangler betaling: 250 kr. som ikke er betalt.");
                             }
-
-                            samletBeløb = b.beløb + samletBeløb;
-                            System.out.println();
                         }
                     }
                 }
-                System.out.println("Samlet beløb for d." + dato + " er: " + samletBeløb + "kr.");
+                samletBeløb = betaltBeløb + mangledeBeløb;
+                System.out.println("Samlet beløb for d." + dato + " er: " + samletBeløb + "kr. Manglende beløb: " + mangledeBeløb + " ikke betalt");
                 break;
             } else {
                 System.out.println("Det er ikke muligt at se regnskabet for fremtiden, vær sød at vælge en dato før dags dato.");
@@ -282,15 +288,15 @@ public class Aftaler {
             String dato = bidder[2]; // Den gemmer "d"
             String tid = bidder[3];
             String beløb = bidder[4];
-            boolean kredit;
+            boolean kredit = Boolean.parseBoolean(bidder[5]);
             // Integer Sid;
 
             try {
                 // Sid = Integer.valueOf(id);
                 // int Cid = Sid;
-                kredit = Boolean.parseBoolean(bidder[5]);
                 LocalDate Cdato = LocalDate.parse(dato, Datoformatter);
                 LocalTime Ctid = LocalTime.parse(tid, Tidformatter);
+
                 // Double Cbeløb = Double.parseDouble(beløb);
                 // System.out.println("Converted integer: " +Cid+ " Dato:" +Cdato+ " Tid:" +Ctid+ " beløb:" +Cbeløb);
                 Aftaler.bookinger.add(new Aftaler(navn,Cdato, Ctid, kredit));
