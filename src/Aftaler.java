@@ -59,14 +59,16 @@ public class Aftaler {
 
 
         LocalDate dato = tastDato();
-
+        boolean kredit;
         LocalTime bookingtid = seTid();
-        System.out.println("Er bookingen betalt? (true/false)");
-        boolean kredit = tastatur.nextBoolean();
-       // while (vaelgEtSvar){
-        //    boolean kredit = tastatur.nextBoolean();
+        System.out.println("Er bookingen Kredit? (true/false)");
+        try {
+             kredit = tastatur.nextBoolean();
+            bookinger.add(new Aftaler(navn, dato, bookingtid, kredit));
+        } catch (Exception e){
+            System.out.println("Prøv igen");
+        }
 
-        bookinger.add(new Aftaler(navn, dato, bookingtid, kredit));
         LavTextfilfraBookingerArray();
     }
 
@@ -235,11 +237,11 @@ public class Aftaler {
                     for (Aftaler b : bookinger) {
                         if (b.dato.isEqual(dato) && b.bookingtid.equals(tid)) {
 
-                            if (b.kredit = true ) {
+                            if (b.kredit == true ) {
                                 betaltBeløb += b.beløb;
                                 System.out.println(b);
                             }
-                            if (b.kredit = false) {
+                            if (b.kredit == false) {
                                 mangledeBeløb += b.beløb;
                                 System.out.println(b);
                                 System.out.println("Mangler betaling: 250 kr. som ikke er betalt.");
@@ -290,7 +292,7 @@ public class Aftaler {
             String beløb = bidder[4];
             boolean kredit = Boolean.parseBoolean(bidder[5]);
             // Integer Sid;
-
+            System.out.println(bidder[5]);
             try {
                 // Sid = Integer.valueOf(id);
                 // int Cid = Sid;
