@@ -8,6 +8,8 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static src.Salon.checkOmTal;
+
 public class Aftaler {
     static Scanner tastatur = new Scanner(System.in);
     static ArrayList<Aftaler> bookinger = new ArrayList<>();
@@ -300,6 +302,54 @@ public class Aftaler {
             linje = ind.readLine();
 
 
+        }
+
+    }
+    public void ekstraKøb() {
+        double børste = 100;
+        double shampoo = 150;
+        double voks = 120;
+        double samletEkstra = 0;
+        double iAlt;
+        int valg;
+
+        seTider();
+        System.out.println("Hvilken id har aftalen du vil redigerer?");
+        int id = tastatur.nextInt();
+        System.out.println("Har kunden tilkøbt ekstra produkter?");
+        System.out.println("Tast 1: Ja");
+        System.out.println("Tast 0: Nej");
+        valg = checkOmTal();
+
+
+        while (valg == 1 | valg == 2 | valg == 3) {
+            System.out.println("Hvad har kunden tilkøbt?");
+            System.out.println("Tast 1: Børste");
+            System.out.println("Tast 2: Shampoo");
+            System.out.println("Tast 3: Voks");
+            System.out.println("Tast 4: Gå til forrige side");
+            valg = checkOmTal();
+
+            if (valg == 1) {
+                samletEkstra = samletEkstra + børste;
+            }
+            if (valg == 2) {
+                samletEkstra = samletEkstra + shampoo;
+            }
+            if (valg == 3) {
+                samletEkstra = samletEkstra + voks;
+            }
+            iAlt = samletEkstra + beløb;
+            for (Aftaler aftale : bookinger) {
+                if (aftale.getId() == id) {
+                    aftale.beløb = iAlt;
+                }
+            }
+            System.out.println("Ekstra tilkøb for kunden er: " + samletEkstra); //Det skal ind i arraylisten
+            System.out.println("Kundens samlede beløb er: " + iAlt);
+        }
+        if (valg == 0) {
+            System.out.println("Nærrig");
         }
     }
 }
