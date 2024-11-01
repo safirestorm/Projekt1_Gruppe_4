@@ -76,7 +76,7 @@ public class Aftaler {
                 }
             }
         } catch (Exception e){
-            System.out.println("Prøv igen");
+            System.out.println("Ugyldigt svar, du bliver nød til at starte forfra.");
         }
 
         lavTextfilfraBookingerArray();
@@ -120,6 +120,7 @@ public class Aftaler {
         while (!korrektTid){
             System.out.println("Skriv tid (hh:mm)");
             String indtastetTid = tastatur.nextLine();
+            tastatur.nextLine();
 
             try {
                 tid = LocalTime.parse(indtastetTid);

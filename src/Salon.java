@@ -7,26 +7,12 @@ import java.util.Scanner;
 
 public class Salon {
     static Scanner keyboard = new Scanner(System.in);
-
-
+    static Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
 
     public static void main(String[] args) throws IOException {
         int valg;
-        // Dummy aftaler
-        /*
-        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,11,11), LocalTime.of(10,0),true));
-        Aftaler.bookinger.add(new Aftaler("Bob",LocalDate.of(2222,11,11),LocalTime.of(10,0),true));
-        Aftaler.bookinger.add(new Aftaler("Hans",LocalDate.of(2222,11,11),LocalTime.of(10,0),true));
-        Aftaler.bookinger.add(new Aftaler("Mads",LocalDate.of(2222,11,11),LocalTime.of(10,0),true));
-        Aftaler.bookinger.add(new Aftaler("Bent",LocalDate.of(2202,11,11),LocalTime.of(10,0),true));
-        Aftaler.bookinger.add(new Aftaler("Sofie",LocalDate.of(2202,11,11),LocalTime.of(10,0),true));
-        Aftaler.bookinger.add(new Aftaler("Ole",LocalDate.of(2222,12,11),LocalTime.of(10,0),true));
-        */
 
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
         aftale.leasTextfilerogInputIBookinger();
-
-        System.out.println(Aftaler.bookinger);
 
         while (true) {
             System.out.println("Velkommen til Harry's Salon");
@@ -61,7 +47,6 @@ public class Salon {
     }
 
     static void bookingMenu() throws IOException{
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
         String svar;
 
         while (true) {
@@ -71,7 +56,7 @@ public class Salon {
             System.out.println("Tast 3: Slet en booking");
             System.out.println("Tast 4: Rediger booking");
             System.out.println("Tast 0: Gå til forrige side");
-            System.out.println("Indtast et tal [0-3]");
+            System.out.println("Indtast et tal [0-4]");
             int bookerValg = checkOmTal();
             if (bookerValg == 0) break;
 
@@ -101,6 +86,7 @@ public class Salon {
                     break;
                 case 4:
                     aftale.ekstraKøb();
+                    break;
                 default:
                     System.out.println("Ugyldigt valg, prøv igen");
             }
@@ -108,7 +94,6 @@ public class Salon {
     }
 
     static void revisorMenu(){
-        Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
 
         while (true) {
             System.out.println("Du har nu følgende muligheder:");
