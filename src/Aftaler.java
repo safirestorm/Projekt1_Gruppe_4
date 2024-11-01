@@ -295,7 +295,7 @@ public class Aftaler {
         }
 
     }
-    public void ekstraKøb() {
+    public void ekstraKøb() throws IOException {
         double børste = 100;
         double shampoo = 150;
         double voks = 120;
@@ -335,8 +335,10 @@ public class Aftaler {
                     aftale.beløb = iAlt;
                 }
             }
-            System.out.println("Ekstra tilkøb for kunden er: " + samletEkstra); //Det skal ind i arraylisten
+            System.out.println("Ekstra tilkøb for kunden er: " + samletEkstra);
             System.out.println("Kundens samlede beløb er: " + iAlt);
+            lavTextfilfraBookingerArray();
+
         }
         if (valg == 0) {
             System.out.println("Nærrig");
