@@ -292,56 +292,56 @@ public class Aftaler {
             } catch (NumberFormatException e) {                                                 // Her fanger den hvis noget i Stringen ikke er rigtigt
                 System.out.println("Invalid integer input");
             }
-            linje = ind.readLine();                                                             //Her Starter den om igen
+            linje = ind.readLine();                                                             // Her Starter den om igen
         }
 
     }
-    public void ekstraKøb() throws IOException {
-        double børste = 100;
+    public void ekstraKøb() throws IOException {                                                // Laver en metode, der skal registrerer ekstra køb hos en kunde.
+        double børste = 100;                                                                    // Opretter variabler.
         double shampoo = 150;
         double voks = 120;
-        double samletEkstra = 0;
-        double iAlt;
-        int valg;
+        double samletEkstra = 0;                                                                // Samlet ekstra beløb hos kunden (udover klipningen).
+        double iAlt;                                                                            // Pris på klipning og ekstra tilkøb.
+        int valg;                                                                               // ID på kunden, så man kan opdatere objektet i arraylisten.
 
-        seTider();
+        seTider();                                                                              // Metode der viser tiderne på en bestemt dag.
         System.out.println("Hvilken id har aftalen du vil redigerer?");
-        int id = tastatur.nextInt();
+        int id = tastatur.nextInt();                                                            // Bruger taster ID'et ind på kunden.
         System.out.println("Har kunden tilkøbt ekstra produkter?");
         System.out.println("Tast 1: Ja");
         System.out.println("Tast 0: Nej");
-        valg = checkOmTal();
+        valg = checkOmTal();                                                                    // Metode der sørger for, at et tal bliver sat ind.
 
 
         while (valg == 1 | valg == 2 | valg == 3) {
             System.out.println("Hvad har kunden tilkøbt?");
-            System.out.println("Tast 1: Børste(100kr)");
-            System.out.println("Tast 2: Shampoo(150kr)");
-            System.out.println("Tast 3: Voks(120kr)");
+            System.out.println("Tast 1: Børste (100kr)");
+            System.out.println("Tast 2: Shampoo (150kr)");
+            System.out.println("Tast 3: Voks (120kr)");
             System.out.println("Tast 4: Gå til forrige side");
             valg = checkOmTal();
 
-            if (valg == 1) {
-                samletEkstra = samletEkstra + børste;
+            if (valg == 1) {                                                                    // Hvis 1.
+                samletEkstra = samletEkstra + børste;                                           // Tildeler børste variablen til samletEkstra.
             }
-            if (valg == 2) {
-                samletEkstra = samletEkstra + shampoo;
+            if (valg == 2) {                                                                    // Hvis 2.
+                samletEkstra = samletEkstra + shampoo;                                          // Tildeler shampoo variablen til samletEkstra.
             }
-            if (valg == 3) {
-                samletEkstra = samletEkstra + voks;
+            if (valg == 3) {                                                                    // Hvis 3.
+                samletEkstra = samletEkstra + voks;                                             // Tildeler voks variblen til samletEkstra.
             }
-            iAlt = samletEkstra + beløb;
+            iAlt = samletEkstra + beløb;                                                        // Kundens endelige beløb bliver tildelt.
             for (Aftaler aftale : bookinger) {
-                if (aftale.getId() == id) {
-                    aftale.beløb = iAlt;
+                if (aftale.getId() == id) {                                                     // Matcher ID'et med det samme ID i arraylisten.
+                    aftale.beløb = iAlt;                                                        // Vi ændrer til det nye beløb hos kunden
                 }
             }
             System.out.println("Ekstra tilkøb for kunden er: " + samletEkstra);
             System.out.println("Kundens samlede beløb er: " + iAlt);
-            lavTextfilfraBookingerArray();
+            lavTextfilfraBookingerArray();                                                      // Opdaterer tekstfilen med de nye ændringer.
 
         }
-        if (valg == 0) {
+        if (valg == 0) {                                                                        // Hvis man ikke vil støtte Harrys salon.
             System.out.println("Nærrig");
         }
     }
