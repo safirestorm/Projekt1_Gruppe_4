@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static src.Salon.checkOmTal;
+import static src.Salon.keyboard;
 
 public class Aftaler {
     static Scanner tastatur = new Scanner(System.in);
@@ -68,6 +69,7 @@ public class Aftaler {
             }
             if(!alleredeBooket){
                 bookinger.add(new Aftaler(navn, dato, bookingtid)); // Tilføj kun, hvis ingen booking findes
+                System.out.println("Booking oprettet!");
             }
         lavTextfilfraBookingerArray();
     }
@@ -76,6 +78,7 @@ public class Aftaler {
         seTider();
         System.out.println("Hvilken id har aftalen du vil slette?");
         int id = tastatur.nextInt();
+        tastatur.nextLine();
         bookinger.removeIf(b -> b.getId() == id);
         tastatur.nextLine();
         lavTextfilfraBookingerArray();
@@ -283,8 +286,7 @@ public class Aftaler {
         System.out.println("Har kunden tilkøbt ekstra produkter?");
         System.out.println("Tast 1: Ja");
         System.out.println("Tast 0: Nej");
-        valg = checkOmTal();                                                                    // Metode der sørger for, at et tal bliver sat ind.
-
+        valg = checkOmTal();                                                                     // Metode der sørger for, at et tal bliver sat ind.
 
         while (valg == 1 | valg == 2 | valg == 3) {
             System.out.println("Hvad har kunden tilkøbt?");
