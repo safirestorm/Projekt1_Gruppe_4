@@ -19,16 +19,14 @@ public class Aftaler {
     LocalDate dato;
     public LocalTime bookingtid;
     double beløb;
-    boolean kredit;
 
-    Aftaler(String navn, LocalDate dato, LocalTime bookingtid, boolean kredit) {
+    Aftaler(String navn, LocalDate dato, LocalTime bookingtid) {
         nrAftaler++;
         id = nrAftaler;
         this.navn = navn;
         this.dato = dato;
         this.bookingtid = bookingtid;
         beløb = 250;
-        this.kredit = kredit;
     }
 
     int getId() {
@@ -57,28 +55,18 @@ public class Aftaler {
         System.out.println("Hvad er kundens navn?");
         String navn = tastatur.nextLine();
 
-
         LocalDate dato = tastDato();
-        boolean kredit;
         LocalTime bookingtid = seTid();
-        System.out.println("Er bookingen Kredit? (true/false)");
-        boolean optaget = false;
-        try {
-            kredit = tastatur.nextBoolean();
 
             for(Aftaler b: bookinger) {
                 while (dato != b.dato && bookingtid != b.bookingtid) {
-                    bookinger.add(new Aftaler(navn, dato, bookingtid, kredit));
+                    bookinger.add(new Aftaler(navn, dato, bookingtid));
                 }
-                if(optaget == false) {
-                    System.out.println("Der er allerede en booking på den ønskede tid");
-                    optaget = true;
+                if (dato == b.dato && bookingtid == b.bookingtid) {
+                    System.out.println("Der er allerede en booking på det tidspunkt, prøv igen.");
+                    break;
                 }
             }
-        } catch (Exception e){
-            System.out.println("Ugyldigt svar, du bliver nød til at starte forfra.");
-        }
-
         lavTextfilfraBookingerArray();
     }
 
@@ -115,12 +103,9 @@ public class Aftaler {
         LocalTime tid = null;
         boolean korrektTid = false;
 
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("10:00");
-
         while (!korrektTid){
             System.out.println("Skriv tid (hh:mm)");
             String indtastetTid = tastatur.nextLine();
-            tastatur.nextLine();
 
             try {
                 tid = LocalTime.parse(indtastetTid);
@@ -128,7 +113,6 @@ public class Aftaler {
             } catch (RuntimeException e) {
                 System.out.println("Ugyldig tid, skriv tid (hh:mm)");
             }
-
         }
         return tid;
     }
@@ -214,8 +198,6 @@ public class Aftaler {
     public void seBudgetPrDag() {
         while (true) {
             LocalDate dato = verficerDato();
-            double betaltBeløb = 0;
-            double mangledeBeløb = 0;
             double samletBeløb = 0;
 
             if (dato.isBefore(LocalDate.now())) {
@@ -226,21 +208,12 @@ public class Aftaler {
 
                     for (Aftaler b : bookinger) {
                         if (b.dato.isEqual(dato) && b.bookingtid.equals(tid)) {
-
-                            if (b.kredit == true ) {
-                                betaltBeløb += b.beløb;
-                                System.out.println(b);
-                            }
-                            if (b.kredit == false) {
-                                mangledeBeløb += b.beløb;
-                                System.out.println(b);
-                                System.out.println("Mangler betaling: 250 kr. som ikke er betalt.");
-                            }
+                            samletBeløb = b.beløb + samletBeløb;
+                            System.out.println(b);
                         }
                     }
                 }
-                samletBeløb = betaltBeløb + mangledeBeløb;
-                System.out.println("Samlet beløb for d." + dato + " er: " + samletBeløb + "kr. Manglende beløb: " + mangledeBeløb + " ikke betalt");
+                System.out.println("Samlet beløb for d." + dato + " er: " + samletBeløb);
                 break;
             } else {
                 System.out.println("Det er ikke muligt at se regnskabet for fremtiden, vær sød at vælge en dato før dags dato.");
@@ -257,9 +230,8 @@ public class Aftaler {
             LocalDate Bdato = b.dato;                                                           // -||- dato
             LocalTime Btid = b.bookingtid;                                                      // -||- tid
             Double beløb = b.beløb;                                                             // -||- beløb
-            boolean kredit = b.kredit;                                                          // -||- kredit
 
-            ud2.println(id + "\t" + Bnavn + "\t" + Bdato + "\t" + Btid + "\t" + beløb + "\t" + kredit); // Her bruger jeg printer variablen til at putte alle variablerne ind i textfilen.
+            ud2.println(id + "\t" + Bnavn + "\t" + Bdato + "\t" + Btid + "\t" + beløb );        // Her bruger jeg printer variablen til at putte alle variablerne ind i textfilen.
         }
         ud2.close();                                                                            // Her stopper jeg printeren
     }
@@ -278,7 +250,6 @@ public class Aftaler {
             String dato = bidder[2];
             String tid = bidder[3];
             // String beløb = bidder[4];                                                        //Samme her
-            boolean kredit = Boolean.parseBoolean(bidder[5]);
             // Integer Sid;
             try {
                 // Sid = Integer.valueOf(id);
@@ -286,7 +257,7 @@ public class Aftaler {
                 LocalDate Cdato = LocalDate.parse(dato, Datoformatter);                         //Her tager jeg Stringen dato og formattere om til en LocalDate som jeg putter i Cdato
                 LocalTime Ctid = LocalTime.parse(tid, Tidformatter);                            //Her tager jeg Stringen tid og formattere om til en LocalTime som jeg putter i Ctid
                 // Double Cbeløb = Double.parseDouble(beløb);
-                Aftaler.bookinger.add(new Aftaler(navn,Cdato, Ctid, kredit));                   //Her putter jeg alle de navn og alle de formatteret ind i vores bookinger
+                Aftaler.bookinger.add(new Aftaler(navn,Cdato, Ctid));                           //Her putter jeg alle de navn og alle de formatteret ind i vores bookinger
 
 
             } catch (NumberFormatException e) {                                                 // Her fanger den hvis noget i Stringen ikke er rigtigt

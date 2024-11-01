@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Salon {
     static Scanner keyboard = new Scanner(System.in);
-    static Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0),true);
+    static Aftaler aftale = new Aftaler("Bob", LocalDate.of(2024,6,5), LocalTime.of(10,0));
 
     public static void main(String[] args) throws IOException {
         int valg;
@@ -72,6 +72,7 @@ public class Salon {
                         System.out.println("Vil du oprette flere aftaler? Ja/Nej");
                         svar = keyboard.nextLine();
                         if (svar.equalsIgnoreCase("Ja")) {
+                            keyboard.nextLine();
                             aftale.opretAftaler();
                         } else if (svar.equalsIgnoreCase("Nej")) {
                             break;
