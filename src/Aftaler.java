@@ -314,9 +314,9 @@ public class Aftaler {
 
         while (valg == 1 | valg == 2 | valg == 3) {
             System.out.println("Hvad har kunden tilkøbt?");
-            System.out.println("Tast 1: Børste");
-            System.out.println("Tast 2: Shampoo");
-            System.out.println("Tast 3: Voks");
+            System.out.println("Tast 1: Børste(100kr)");
+            System.out.println("Tast 2: Shampoo(150kr)");
+            System.out.println("Tast 3: Voks(120kr)");
             System.out.println("Tast 4: Gå til forrige side");
             valg = checkOmTal();
 
