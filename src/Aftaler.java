@@ -57,15 +57,17 @@ public class Aftaler {
 
         LocalDate dato = tastDato();
         LocalTime bookingtid = seTid();
+        boolean alleredeBooket = false;
 
             for(Aftaler b: bookinger) {
-                while (dato != b.dato && bookingtid != b.bookingtid) {
-                    bookinger.add(new Aftaler(navn, dato, bookingtid));
-                }
-                if (dato == b.dato && bookingtid == b.bookingtid) {
+                if (dato.equals(b.dato) && bookingtid.equals(b.bookingtid)) {
                     System.out.println("Der er allerede en booking på det tidspunkt, prøv igen.");
-                    break;
+                    alleredeBooket = true;
+                    break;  // Stopper loop, hvis en booking findes
                 }
+            }
+            if(!alleredeBooket){
+                bookinger.add(new Aftaler(navn, dato, bookingtid)); // Tilføj kun, hvis ingen booking findes
             }
         lavTextfilfraBookingerArray();
     }
