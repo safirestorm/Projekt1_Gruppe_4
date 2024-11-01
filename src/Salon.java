@@ -72,7 +72,6 @@ public class Salon {
                         System.out.println("Vil du oprette flere aftaler? Ja/Nej");
                         svar = keyboard.nextLine();
                         if (svar.equalsIgnoreCase("Ja")) {
-                            keyboard.nextLine();
                             aftale.opretAftaler();
                         } else if (svar.equalsIgnoreCase("Nej")) {
                             break;
